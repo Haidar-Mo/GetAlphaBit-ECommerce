@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Sales;
-use App\Models\Product_Attribute;
+use App\Models\Sale;
+use App\Models\ProductAttribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
@@ -22,7 +22,7 @@ class Product extends Model
         'is_available'
     ];
 
-    protected $appends = ['final_price'];
+    protected $appends = ['discount_price', 'discount_ratio'];
 
     protected static function booted(){
         static::creating(function ($product){
@@ -37,28 +37,44 @@ class Product extends Model
 
     }
 
-    public function attributes(){
-        return $this->hasMany(Product_Attribute::class);
+    public function attributes()
+    {
+        return $this->hasMany(ProductAttribute::class);
     }
 
     public function media(){
         return $this->morphMany(Media::class, 'mediaable');
     }
-    public function sales(){
-        return $this->belongsToMany(Sales::class)->withPivot(['discount_ratio','discount_price']);
+    public function sales()
+    {
+        return $this->belongsToMany(Sale::class)->withPivot(['discount_ratio', 'discount_price']);
     }
 
     public function reviews(){
         return $this->hasMany(Review::class);
     }
 
-    public function getFinalPriceAttribute(){
-        $sale = $this->sales()->where('is_active', true)->first();
-        if(!$sale){
-            return $this->price;
-        }
-        else{
-            return $this->price - ($this->price * $sale->pivot->discount_ratio /100);
-        }
+    public function getDiscountPriceAttribute()
+    {
+        $sale = $this->sales->where('is_active', true)->first();
+
+        return $sale?->pivot->discount_price;
+        /* if ($sale) {
+            return $sale->pivot->discount_price;
+        } else {
+            return null;
+        } */
+    }
+
+    public function getDiscountRatioAttribute()
+    {
+        $sale = $this->sales->where('is_active', true)->first();
+        return  $sale?->pivot->discount_ratio;
+
+        /* if ($sale) {
+            return $sale->pivot->discount_price;
+        } else {
+            return null;
+        } */
     }
 }

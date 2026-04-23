@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Product;
 
-class Sales extends Model
+class Sale extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,9 @@ class Sales extends Model
         'is_active'
     ];
 
-    public function products(){
-        return $this->belongsToMany(Product::class , 'product_sales')->withPivot(['discount_ratio','discount_price']);
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_sales')
+            ->withPivot(['discount_ratio', 'discount_price']);
     }
 }

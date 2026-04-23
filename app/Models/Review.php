@@ -21,17 +21,17 @@ class Review extends Model
         static::creating(function($review){
             $product = $review->product;
 
-            $product->reviews = $product->reviewsRelation()->avg('review');
-            $product->reviews_count = $product->reviewsRelation()->count();
+            $product->reviews = $product->reviews()?->avg('review') ? : 0.0;
+            $product->reviews_count = $product->reviews()->count();
 
             $product->save();
         });
     }
 
     public function product(){
-        return $this->belongTo(Product::class);
+        return $this->belongsTo(Product::class);
     }
     public function user(){
-        return $this->belongTo(User::class);
+        return $this->belongsTo(User::class);
     }
 }

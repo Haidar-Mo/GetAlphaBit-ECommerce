@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Product;
 
-class Product_Attribut extends Model
+class ProductAttribute extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,8 @@ class Product_Attribut extends Model
         'value'
     ];
 
-    public function product(){
-        return $this->belongTo(Product::class);
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 }

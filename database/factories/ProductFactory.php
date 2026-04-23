@@ -25,10 +25,10 @@ class ProductFactory extends Factory
         return [
             'category_id' => Category::factory(),
             'name' => $name,
-            'slug' => Str::slug($name),
-            'sky' => $name . '-' . $brand,
+            /*             'slug' => Str::slug($name),
+                        'sky' => $name . '-' . $brand, */
             'description' => fake()->paragraph(),
-            'price' => fake()->randomFloat(2,10,1000),
+            'price' => fake()->randomFloat(2, 10, 1000),
             'brand' => $brand,
             'is_available' => true
         ];
