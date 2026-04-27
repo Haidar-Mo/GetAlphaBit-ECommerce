@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Sale;
 use App\Models\ProductAttribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -26,12 +27,12 @@ class Product extends Model
 
     protected static function booted(){
         static::creating(function ($product){
-            $product->slug = str($product->name)->lower()->trim()->replace(' ','_');
+            $product->slug = str::slug($product->name);
             $color = $product->attributes()->where('name','color')->value('value');
             $size = $product->attributes()->where('name','size')->value('value');
 
             $product->sky = strtoupper(
-                $product->name . $product->brand . ($color ?? '') . ($size ?? '')
+                $product->name . "-" . $product->brand . "-" . ($color ?? 'na') . "-" . ($size ?? 'na')
             );
         });
 
