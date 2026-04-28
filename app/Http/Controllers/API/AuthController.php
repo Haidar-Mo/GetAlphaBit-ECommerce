@@ -8,6 +8,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\AuthResource;
 use App\Services\AuthService;
 use App\Traits\FormattedResponse;
+use Exception;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -38,6 +39,7 @@ class AuthController extends Controller
         }
 
     }
+
 
     public function login(LoginRequest $request)
     {
@@ -85,7 +87,7 @@ class AuthController extends Controller
                 new AuthResource($user),
                 'Token Refreshed Successfully'
             );
-        } catch (Exeption $e) {
+        } catch (Exception $e) {
             return $this->error($e);
         }
     }

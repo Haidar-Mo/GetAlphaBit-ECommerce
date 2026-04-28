@@ -23,13 +23,14 @@ class Product extends Model
         'is_available'
     ];
 
-    protected $appends = ['discount_price', 'discount_ratio'];
+    protected $appends = ['discount_price', 'discount_ratio', 'is_favorite'];
 
-    protected static function booted(){
-        static::creating(function ($product){
+    protected static function booted()
+    {
+        static::creating(function ($product) {
             $product->slug = str::slug($product->name);
-            $color = $product->attributes()->where('name','color')->value('value');
-            $size = $product->attributes()->where('name','size')->value('value');
+            $color = $product->attributes()->where('name', 'color')->value('value');
+            $size = $product->attributes()->where('name', 'size')->value('value');
 
             $product->sky = strtoupper(
                 $product->name . "-" . $product->brand . "-" . ($color ?? 'na') . "-" . ($size ?? 'na')
@@ -38,12 +39,18 @@ class Product extends Model
 
     }
 
+    public function wishLists()
+    {
+        return $this->hasMany(WishList::class);
+    }
+
     public function attributes()
     {
         return $this->hasMany(ProductAttribute::class);
     }
 
-    public function media(){
+    public function media()
+    {
         return $this->morphMany(Media::class, 'mediaable');
     }
     public function sales()
@@ -51,7 +58,8 @@ class Product extends Model
         return $this->belongsToMany(Sale::class)->withPivot(['discount_ratio', 'discount_price']);
     }
 
-    public function reviews(){
+    public function reviews()
+    {
         return $this->hasMany(Review::class);
     }
 
@@ -70,12 +78,22 @@ class Product extends Model
     public function getDiscountRatioAttribute()
     {
         $sale = $this->sales->where('is_active', true)->first();
-        return  $sale?->pivot->discount_ratio;
+        return $sale?->pivot->discount_ratio;
 
         /* if ($sale) {
             return $sale->pivot->discount_price;
         } else {
             return null;
         } */
+    }
+
+    public function getIsFavoriteAttribute()
+    {
+        if (!auth()->user()) {
+            return false;
+        }
+
+        return $this->wishLists()->where('user_id', auth()->user())->exists();
+
     }
 }

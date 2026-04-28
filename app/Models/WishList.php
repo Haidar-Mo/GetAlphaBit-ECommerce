@@ -3,21 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Product;
 
-class ProductAttribute extends Model
+class WishList extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'product_id',
-        'name',
-        'value'
+        'user_id',
+        'product_id'
     ];
 
-
-
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function product()
     {
