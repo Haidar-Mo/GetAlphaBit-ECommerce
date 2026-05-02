@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\HomePageController;
+use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\ProfileController;
 use App\Http\Controllers\API\WishListController;
 use Illuminate\Http\Request;
@@ -13,6 +16,14 @@ use App\Http\Controllers\API\AuthController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::get('/HomePage', [HomePageController::class, 'index']);
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('product/{id}', [ProductController::class, 'show']);
+
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('category/{id}', [CategoryController::class, 'show']);
+
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/refresh', [AuthController::class, 'refresh']);

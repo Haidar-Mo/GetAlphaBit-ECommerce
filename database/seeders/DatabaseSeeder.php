@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\ProductAttribute;
 use App\Models\Sale;
+use App\Models\Slider;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Product;
@@ -22,7 +23,7 @@ class DatabaseSeeder extends Seeder
   public function run(): void
   {
     User::factory(10)->create();
-
+    Slider::factory(15)->create();
     Category::factory()
       ->count(2)
       ->has(

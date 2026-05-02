@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -18,10 +17,11 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('sky');
             $table->text('description')->nullable();
-            $table->decimal('price',10,2);
+            $table->decimal('price', 10, 2);
+            $table->decimal('discount_price', 10, 2)->nullable();
             $table->string('brand');
             $table->boolean('is_available')->default(true);
-            $table->decimal('reviews',2,1)->default(0);
+            $table->decimal('reviews', 2, 1)->default(0);
             $table->integer('reviews_count')->default(0);
             $table->timestamps();
         });
