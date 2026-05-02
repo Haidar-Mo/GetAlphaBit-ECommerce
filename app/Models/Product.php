@@ -23,7 +23,8 @@ class Product extends Model
         'is_available'
     ];
 
-    protected $appends = ['discount_price', 'discount_ratio', 'is_favorite'];
+    protected $appends = ['discount_ratio', 'is_favorite'];
+    protected $hidden = ['discount_price'];
 
     protected static function booted()
     {
@@ -95,5 +96,28 @@ class Product extends Model
 
         return $this->wishLists()->where('user_id', auth()->user())->exists();
 
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function getFinalDiscountPriceAttribute()
+    {
+        if ($this->attributes['discount_price']) {
+            return $this->attributes['discount_price'];
+        }
+        $sale = $this->sales()
+            ->where('is_active', true)
+            ->where('start_date', '<=', now())
+            ->where('end_date', '>=', now())
+            ->first();
+
+        if ($sale) {
+            return $sale->pivot->discount_price ??
+                ($this->price - ($this->price * $sale->pivot->discount_ratio / 100));
+        }
+
+        return null;
     }
 }

@@ -16,9 +16,9 @@ class ProfileController extends Controller
 
     private $profileService;
 
-    public function _construct(ProfileService $profileService)
+    public function __construct(ProfileService $profileService)
     {
-        return $this->profileService = $profileService;
+        $this->profileService = $profileService;
     }
     public function update(ProfileRequest $request)
     {
