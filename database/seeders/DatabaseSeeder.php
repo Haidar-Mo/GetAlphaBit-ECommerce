@@ -22,10 +22,12 @@ class DatabaseSeeder extends Seeder
    */
   public function run(): void
   {
-    User::factory(10)->create();
-    Slider::factory(15)->create();
+    // User::factory()->isAdmin()->create();
+    // User::factory(10)->create();
+    // Slider::factory(15)->create();
     Category::factory()
-      ->count(2)
+      ->count(5)
+      ->has(Category::factory()->count(2),'children')
       ->has(
         Product::factory(3)
           ->has(ProductAttribute::factory(6), 'attributes')
@@ -37,8 +39,7 @@ class DatabaseSeeder extends Seeder
               'discount_ratio' => 10,
               'discount_price' => 25,
             ]
-          )
-        ,
+          ),
         'products'
       )->create();
 

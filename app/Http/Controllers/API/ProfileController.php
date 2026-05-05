@@ -23,7 +23,7 @@ class ProfileController extends Controller
     public function update(ProfileRequest $request)
     {
         try {
-            $user = $this->profileService->update($request);
+            $user = $this->profileService->update2($request); //: Here I replaced update() with update2()
             return $this->success(
                 new ProfileResource($user),
                 'User Updated Successfully'
@@ -37,6 +37,19 @@ class ProfileController extends Controller
     {
         try {
             $user = $this->profileService->index();
+            return $this->success(
+                new ProfileResource($user),
+                'User Profile'
+            );
+        } catch (Exception $e) {
+            return $this->error($e);
+        }
+    }
+
+    public function show()
+    {
+        try {
+            $user = $this->profileService->show();
             return $this->success(
                 new ProfileResource($user),
                 'User Profile'

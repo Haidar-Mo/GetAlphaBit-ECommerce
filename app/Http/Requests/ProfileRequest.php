@@ -31,8 +31,8 @@ class ProfileRequest extends FormRequest
             'email' => ['sometimes', Rule::unique('users', 'email')->ignore($userId)],
             'phone_number' => [Rule::unique('users', 'phone_number')->ignore($userId), 'sometimes'],
             'address' => 'string|sometimes',
-            'password' => 'required_if:new_password|sometimes',
-            'new_password' => 'confirmed|min:8'
+            'password' => 'required_with:new_password|sometimes',
+            'new_password' => 'required_with:password|confirmed|min:8' //: add required_with here too
         ];
     }
 }

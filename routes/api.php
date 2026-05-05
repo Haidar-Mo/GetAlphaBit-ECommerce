@@ -31,7 +31,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // profile
     Route::put('/edit', [ProfileController::class, 'update']);
-    Route::post('/profile', [ProfileController::class, 'index']);
+    Route::post('/profile', [ProfileController::class, 'index']); //: Why "post" ?? its get. 
+    
+    //: show my profile
+    Route::get('/profile', [ProfileController::class, 'show']);
 
     Route::get('/WishList', [WishListController::class, 'index']);
     Route::post('/toggle/{id}', [WishListController::class, 'toggleWishList']);
