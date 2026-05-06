@@ -33,7 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     // profile
-    Route::put('/edit', [ProfileController::class, 'update']);
+    Route::put('/profile/edit', [ProfileController::class, 'update']);
    // Route::post('/profile', [ProfileController::class, 'index']); //: Why "post" ?? its get. 
 
     //: show my profile

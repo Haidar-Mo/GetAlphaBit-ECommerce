@@ -23,6 +23,10 @@ class Product extends Model
         'is_available'
     ];
 
+    protected $casts = [
+        'price' => 'float',
+    ];
+
     protected $appends = ['discount_ratio', 'is_favorite'];
     protected $hidden = ['discount_price'];
 

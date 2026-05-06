@@ -18,11 +18,11 @@ class ProductFilter extends BaseFilter
 
     public function minPrice(Builder $query)
     {
-        return $query->where('price', '>=', request('min_price'));
+        return $query->where('price', '>=', request()->input('minPrice'));
     }
     public function maxPrice(Builder $query)
     {
-        return $query->where('price', '<=', request('max_price'));
+        return $query->where('price', '<=', request()->input('maxPrice'));
     }
 
     public function availability(Builder $query)

@@ -30,8 +30,8 @@ class ProductDetailsResource extends JsonResource
             'reviews' => $this->reviews,
             'reviews_count' => $this->reviews_count,
             'is_favorite' => $this->is_favorite,
-            'hero_image' => $this->media->where('is_hero', true)->first(),
-            'media' => $this->media->where('is_hero', false)->map(function ($media) {
+            'hero_image' => $this->media->where('is_hero', true)->first()->only(['id', 'path']),
+            'media' => $this->media->where('is_hero', false)->values()->map(function ($media) {
                 return [
                     'id' => $media->id,
                     'path' => $media->path,
