@@ -27,7 +27,7 @@ class ProductController extends Controller
             $products = $this->productService->index($filter);
             return $this->success(
                 ProductResource::collection($products),
-                'Products Retrieve Successfully'
+                'Products Retrieved Successfully'
             );
         } catch (Exception $e) {
             return $this->error($e);
@@ -39,7 +39,7 @@ class ProductController extends Controller
             $product = $this->productService->show($id);
             return $this->success(
                 new ProductDetailsResource($product),
-                'Product Retriev Successfully'
+                'Product Retrieved Successfully'
             );
         } catch (Exception $e) {
             return $this->error($e);

@@ -34,7 +34,7 @@ class WishListController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'producr removed form Wish List successfully',
+                'message' => 'product removed form Wish List successfully',
                 'is_favorite' => false
             ]);
         }
@@ -43,7 +43,7 @@ class WishListController extends Controller
         ]);
         return response()->json([
             'status' => true,
-            'message' => 'producr added to Wish List successfully',
+            'message' => 'product added to Wish List successfully',
             'is_favorite' => true
         ]);
     }

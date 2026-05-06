@@ -18,7 +18,7 @@ class MediaFactory extends Factory
     public function definition(): array
     {
         return [
-            'path' => fake()->imageUrl(),
+            'path' => 'products/' . $this->faker->numberBetween(1, 15) . '.png',
             'is_hero' => fake()->boolean(20)
         ];
     }

@@ -44,9 +44,7 @@ class ProductDetailsResource extends JsonResource
                     'value' => $attribute->value
                 ];
             }),
-            'category' => new CategoryResource($this->category),
-            'parent' => new CategoryResource($this->category->parent),
-            'children' => CategoryResource::collection($this->category?->children),
+            'category' => $this->category,
             'related_products' => $this->category->products->map(function ($product) {
                 return [
                     'id' => $product->id,

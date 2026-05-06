@@ -37,8 +37,6 @@ class CategoryService
         $category = Category::with([
             'parent',
             'children',
-            'products.media', // ?? 
-            'products.sales', // ??
         ])->findOrFail($id);
 
         return $category;

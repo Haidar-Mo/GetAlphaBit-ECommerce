@@ -15,15 +15,15 @@ class HomePageService
     {
         $data = [
             'sliders' => Slider::latest()->take(5)->get(),
-            'fetured_product' => Product::with(['media', 'sales'])
+            'featured_product' => Product::with(['category', 'media', 'sales'])
                 ->orderByDesc('reviews')
                 ->take(8)
                 ->get(),
-            'latest_product' => Product::with(['media', 'sales'])
+            'latest_product' => Product::with(['category', 'media', 'sales'])
                 ->latest()
                 ->take(8)
                 ->get(),
-            'product_with_active_sales' => Product::with(['media', 'sales'])
+            'product_with_active_sales' => Product::with(['category', 'media', 'sales'])
                 ->whereHas('sales', function ($q) {
                     $q->where('is_active', true);
                 })

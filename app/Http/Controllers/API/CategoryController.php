@@ -24,7 +24,33 @@ class CategoryController extends Controller
             $categories = $this->categoryService->index();
             return $this->success(
                 CategoryResource::collection($categories),
-                'Categories retriev sucessfully'
+                'Categories retrieved successfully'
+            );
+        } catch (Exception $e) {
+            return $this->error($e);
+        }
+    }
+
+    public function indexWithChildren()
+    {
+        try {
+            $categories = $this->categoryService->indexWithChildren();
+            return $this->success(
+                $categories,
+                'Categories with children retrieved successfully'
+            );
+        } catch (Exception $e) {
+            return $this->error($e);
+        }
+    }
+
+    public function indexWithParent()
+    {
+        try {
+            $categories = $this->categoryService->indexWithParent();
+            return $this->success(
+                $categories,
+                'Categories with parent retrieved successfully'
             );
         } catch (Exception $e) {
             return $this->error($e);
@@ -37,7 +63,7 @@ class CategoryController extends Controller
             $category = $this->categoryService->show($id);
             return $this->success(
                 new CategoryResource($category),
-                'Category retriev successfully'
+                'Category retrieved successfully'
             );
         } catch (Exception $e) {
             return $this->error($e);

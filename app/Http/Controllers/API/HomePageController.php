@@ -25,7 +25,7 @@ class HomePageController extends Controller
             $homePage = $this->homePageService->index();
             return $this->success(
                 new HomePageResource($homePage),
-                'Home Page Retriev successfully'
+                'Home Page Retrieved successfully'
             );
         } catch (Exception $e) {
             return $this->error($e);

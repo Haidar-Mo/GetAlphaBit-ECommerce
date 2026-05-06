@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Model;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends Factory<Model>
+ * @extends Factory<Category>
  */
 class CategoryFactory extends Factory
 {

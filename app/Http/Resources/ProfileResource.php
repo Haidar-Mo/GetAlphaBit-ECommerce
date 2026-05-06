@@ -23,8 +23,6 @@ class ProfileResource extends JsonResource
                 'phone_number' => $this->phone_number,
                 'address' => $this->address
             ],
-            'access_token' => $this->access_token,
-            'refresh_token' => $this->refresh_token
         ];
     }
 }

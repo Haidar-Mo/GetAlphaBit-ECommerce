@@ -21,7 +21,10 @@ Route::get('/HomePage', [HomePageController::class, 'index']);
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('product/{id}', [ProductController::class, 'show']);
 
-Route::get('/categories', [CategoryController::class, 'index']);
+// Route::get('/categories', [CategoryController::class, 'index']);
+
+Route::get('/main-categories', [CategoryController::class, 'indexWithChildren']); //: All main categories with their children
+Route::get('/sub-categories', [CategoryController::class, 'indexWithParent']); //: All sub categories with their parent
 Route::get('category/{id}', [CategoryController::class, 'show']);
 
 
@@ -31,8 +34,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // profile
     Route::put('/edit', [ProfileController::class, 'update']);
-    Route::post('/profile', [ProfileController::class, 'index']); //: Why "post" ?? its get. 
-    
+   // Route::post('/profile', [ProfileController::class, 'index']); //: Why "post" ?? its get. 
+
     //: show my profile
     Route::get('/profile', [ProfileController::class, 'show']);
 

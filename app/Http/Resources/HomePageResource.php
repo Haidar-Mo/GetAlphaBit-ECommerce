@@ -18,12 +18,12 @@ class HomePageResource extends JsonResource
             'sliders' => collect($this['sliders'])->map(function ($slider) {
                 return [
                     'id' => $slider->id,
-                    'image_path' => $slider->image_path,
+                    'image_path' => asset($slider->image_path),
                 ];
             }),
 
-            'fetured_product' => ProductResource::collection(
-                $this['fetured_product']
+            'featured_product' => ProductResource::collection(
+                $this['featured_product']
             ),
 
             'latest_product' => ProductResource::collection(

@@ -93,10 +93,9 @@ class Product extends Model
         if (!auth()->user()) {
             return false;
         }
-
         return $this->wishLists()->where('user_id', auth()->user())->exists();
-
     }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -114,7 +113,7 @@ class Product extends Model
             ->first();
 
         if ($sale) {
-            return $sale->pivot->discount_price ??
+            return $sale->pivot->discount_price ? $sale->pivot->discount_price :
                 ($this->price - ($this->price * $sale->pivot->discount_ratio / 100));
         }
 

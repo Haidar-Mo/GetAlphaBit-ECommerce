@@ -12,7 +12,7 @@ class ProductService
 {
     public function index(ProductFilter $filter)
     {
-        $query = Product::with(['sales', 'media', 'attributes']);
+        $query = Product::with(['category', 'sales', 'media', 'attributes']);
 
         $product = $filter->applyFilters($query)->latest()->paginate(10);
 
@@ -25,6 +25,7 @@ class ProductService
             'media',
             'attributes',
             'sales',
+            'category',
             'reviews'
         ])->findOrFail($id);
 

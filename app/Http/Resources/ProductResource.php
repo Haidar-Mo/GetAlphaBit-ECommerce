@@ -24,7 +24,8 @@ class ProductResource extends JsonResource
             'discount_price' => $this->discount_price,
             'discount_ratio' => $this->discount_ratio,
             'is_available' => $this->is_available,
-            'hero_image' => $this->media->where('is_hero', true)->first(),
+            'category' => $this->category->name,
+            'hero_image' => $this->media->where('is_hero', true)->first() ? asset($this->media->where('is_hero', true)->first()->path) : null,
         ];
     }
 }

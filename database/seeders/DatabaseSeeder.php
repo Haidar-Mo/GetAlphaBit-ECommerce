@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
    */
   public function run(): void
   {
-    // User::factory()->isAdmin()->create();
-    // User::factory(10)->create();
-    // Slider::factory(15)->create();
+    User::factory()->isAdmin()->create();
+    User::factory(10)->create();
+    Slider::factory(15)->create();
     Category::factory()
       ->count(5)
       ->has(Category::factory()->count(2),'children')

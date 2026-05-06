@@ -18,7 +18,7 @@ class SliderFactory extends Factory
     public function definition(): array
     {
         return [
-            'image_path' => fake()->imageUrl(),
+            'image_path' => 'sliders/s1.png',
         ];
     }
 }

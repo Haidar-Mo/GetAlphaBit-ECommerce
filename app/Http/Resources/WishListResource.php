@@ -21,7 +21,6 @@ class WishListResource extends JsonResource
             'price' => $this->product->price,
             'discount_ratio' => $this->product->discount_ratio,
             'discount_price' => $this->product->discount_price,
-            'is_favorite' => true
         ];
     }
 }
