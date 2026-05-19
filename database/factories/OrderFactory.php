@@ -41,9 +41,9 @@ class OrderFactory extends Factory
 
             'total' => ($subtotal + $shipping) - $discount,
 
-            'status' => fake()->randomElement(OrderStatus::cases()),
-            'payment_status' => fake()->randomElement(PaymentStatus::cases()),
-            'payment_method' => fake()->randomElement(PaymentMethod::cases()),
+            'status' => fake()->randomElement(array_column(OrderStatus::cases(), 'value')),
+            'payment_status' => fake()->randomElement(array_column(PaymentStatus::cases(), 'value')),
+            'payment_method' => fake()->randomElement(array_column(PaymentMethod::cases(), 'value')),
         ];
 
     }

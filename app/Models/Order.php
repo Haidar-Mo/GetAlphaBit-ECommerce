@@ -26,9 +26,9 @@ class Order extends Model
     ];
 
     protected $casts = [
-        'status' => CartStatus::class,
-        'payment_status' => PaymentStatus::class,
-        'payment_method' => PaymentMethod::class
+        // 'status' => CartStatus::class,
+        // 'payment_status' => PaymentStatus::class,
+        // 'payment_method' => PaymentMethod::class
     ];
 
     public function orderItems()

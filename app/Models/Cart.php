@@ -16,7 +16,7 @@ class Cart extends Model
     ];
 
     protected $casts = [
-        'status' => CartStatus::class
+        // 'status' => CartStatus::class
     ];
 
     public function user()

@@ -20,7 +20,7 @@ class CouponFactory extends Factory
     {
         return [
             'code' => strtoupper(fake()->unique()->bothify('SALE-###')),
-            'type' => fake()->randomElement(CouponType::cases()),
+            'type' => fake()->randomElement(array_column(CouponType::cases(), 'value')),
             'value' => fake()->numberBetween(5, 50),
             'minimum_order_amount' => fake()->numberBetween(100, 500),
             'usage_limit' => fake()->numberBetween(10, 100),

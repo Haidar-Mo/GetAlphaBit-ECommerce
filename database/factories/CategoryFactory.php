@@ -22,7 +22,8 @@ class CategoryFactory extends Factory
         $name = fake()->unique()->word();
         return [
             'name' => $name,
-            'slug' => Str::slug($name)
+            'slug' => Str::slug($name),
+            'icon' => fake()->imageUrl(64, 64, 'categories', true),
         ];
     }
 }

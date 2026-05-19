@@ -36,7 +36,7 @@ class CategoryController extends Controller
         try {
             $categories = $this->categoryService->indexWithChildren();
             return $this->success(
-                $categories,
+                CategoryResource::collection($categories),
                 'Categories with children retrieved successfully'
             );
         } catch (Exception $e) {

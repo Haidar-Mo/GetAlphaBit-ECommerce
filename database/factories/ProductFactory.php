@@ -23,7 +23,8 @@ class ProductFactory extends Factory
         $name = $this->faker->unique()->words(3, true);
         $brand = fake()->company();
         return [
-            'category_id' => Category::factory(),
+            // 'category_id' => Category::factory(),
+            'category_id' => Category::query()->inRandomOrder()->value('id'),
             'name' => $name,
             /*             'slug' => Str::slug($name),
                         'sky' => $name . '-' . $brand, */

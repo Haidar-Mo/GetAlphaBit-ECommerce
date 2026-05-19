@@ -23,7 +23,7 @@ class CartFactory extends Factory
         return [
             'user_id' => User::factory(),
             'coupon_id' => Coupon::inRandomOrder()->value('id'),
-            'status' => fake()->randomElement(CartStatus::cases()),
+            'status' => fake()->randomElement(array_column(CartStatus::cases(), 'value')),
         ];
     }
 }

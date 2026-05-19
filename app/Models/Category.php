@@ -14,27 +14,32 @@ class Category extends Model
     protected $fillable = [
         'name',
         'slug',
+        'icon',
         'parent_id'
     ];
 
-    protected static function booted(){
-        static::creating(function($category){
+    protected static function booted()
+    {
+        static::creating(function ($category) {
             // $category->slug = str($category->name)->lower()->trim()->replace(' ','_');
             //: better way:
             $category->slug = Str::slug($category->name);
-            
+
         });
     }
 
-    public function parent(){
+    public function parent()
+    {
         return $this->belongsTo(Category::class, 'parent_id');
     }
 
-    public function children(){
-        return $this->hasMany(Category::class , 'parent_id');
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
     }
 
-    public function products(){
+    public function products()
+    {
         return $this->hasMany(Product::class);
     }
 }
