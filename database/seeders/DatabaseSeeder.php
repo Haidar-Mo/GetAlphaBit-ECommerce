@@ -2,6 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Cart;
+use App\Models\CartItem;
+use App\Models\Coupon;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\ProductAttribute;
 use App\Models\Sale;
 use App\Models\Slider;
@@ -27,7 +32,7 @@ class DatabaseSeeder extends Seeder
     Slider::factory(15)->create();
     Category::factory()
       ->count(5)
-      ->has(Category::factory()->count(2),'children')
+      ->has(Category::factory()->count(2), 'children')
       ->has(
         Product::factory(3)
           ->has(ProductAttribute::factory(6), 'attributes')
@@ -42,6 +47,28 @@ class DatabaseSeeder extends Seeder
           ),
         'products'
       )->create();
+
+    Coupon::factory(20)->create();
+
+    Cart::factory(30)
+      ->create()
+      ->each(function ($cart) {
+
+        CartItem::factory(rand(1, 5))
+          ->create([
+            'cart_id' => $cart->id
+          ]);
+      });
+
+    Order::factory(50)
+      ->create()
+      ->each(function ($order) {
+
+        OrderItem::factory(rand(1, 5))
+          ->create([
+            'order_id' => $order->id
+          ]);
+      });
 
   }
 }
