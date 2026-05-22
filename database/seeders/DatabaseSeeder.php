@@ -7,6 +7,11 @@ use App\Models\CartItem;
 use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem; */
+use App\Models\Cart;
+use App\Models\CartItem;
+use App\Models\Coupon;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\ProductAttribute;
 use App\Models\Sale;
 /* use App\Models\Slider;
@@ -45,7 +50,7 @@ class DatabaseSeeder extends Seeder
         ]
       )->create();
 
-    /* Coupon::factory(5)->create();
+    Coupon::factory(5)->create();
 
     Cart::factory(30)
       ->create()
@@ -65,7 +70,7 @@ class DatabaseSeeder extends Seeder
           ->create([
             'order_id' => $order->id
           ]);
-      }); */
+      });
 
   }
 }

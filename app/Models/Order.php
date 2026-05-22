@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\CartStatus;
+use App\Enums\OrderStatus;
 use App\Enums\PaymentMethod;
 use App\Enums\PaymentStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,9 +27,9 @@ class Order extends Model
     ];
 
     protected $casts = [
-        // 'status' => CartStatus::class,
-        // 'payment_status' => PaymentStatus::class,
-        // 'payment_method' => PaymentMethod::class
+        'status' => OrderStatus::class,
+        'payment_status' => PaymentStatus::class,
+        'payment_method' => PaymentMethod::class
     ];
 
     public function orderItems()
