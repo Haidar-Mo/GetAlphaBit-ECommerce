@@ -22,7 +22,7 @@ class Coupon extends Model
     ];
 
     protected $casts = [
-        // 'type' => CouponType::class,
+        'type' => CouponType::class,
         'expires_at' => 'datetime',
         'is_active' => 'boolean'
     ];
