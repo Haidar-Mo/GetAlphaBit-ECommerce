@@ -21,17 +21,17 @@ class Cart extends Model
 
     public function user()
     {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function coupon()
     {
-        $this->belongsTo(Coupon::class);
+        return $this->belongsTo(Coupon::class);
     }
 
     public function cartItems()
     {
-        $this->hasMany(CartItem::class);
+        return $this->hasMany(CartItem::class);
     }
 
 }

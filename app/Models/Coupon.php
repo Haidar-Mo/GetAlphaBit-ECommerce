@@ -28,6 +28,6 @@ class Coupon extends Model
     ];
     public function carts()
     {
-        $this->hasMany(Cart::class);
+        return $this->hasMany(Cart::class);
     }
 }
