@@ -31,7 +31,7 @@ class HomePageService
                 ->get(),
             'product_with_black_color' => Product::with(['category', 'media', 'sales'])
                 ->whereHas('attributes', function ($q) {
-                    $q->where('color', 'like', 'black');
+                    $q->where('name', 'color')->where('value', 'like', 'black');
                 })->latest()->take(5)->get()
         ];
 
