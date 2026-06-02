@@ -29,7 +29,10 @@ class HomePageService
                 })
                 ->take(8)
                 ->get(),
-            'categories' => Category::with('children')->get()
+            'product_with_black_color' => Product::with(['category', 'media', 'sales'])
+                ->whereHas('attributes', function ($q) {
+                    $q->where('color', 'like', 'black');
+                })->latest()->take(5)->get()
         ];
 
         return $data;

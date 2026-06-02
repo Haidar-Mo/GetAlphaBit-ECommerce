@@ -34,6 +34,8 @@ class HomePageResource extends JsonResource
                 $this['product_with_active_sales']
             ),
 
+            'product_with_black_color' => ProductResource::collection($this['product_with_black_color']),
+
             'categories' => CategoryResource::collection(
                 $this['categories']
             ),
