@@ -36,9 +36,9 @@ class HomePageResource extends JsonResource
 
             'product_with_black_color' => ProductResource::collection($this['product_with_black_color']),
 
-            'categories' => CategoryResource::collection(
-                $this['categories']
-            ),
+            // 'categories' => CategoryResource::collection(
+            //     $this['categories']
+            // ),
         ];
     }
 }
