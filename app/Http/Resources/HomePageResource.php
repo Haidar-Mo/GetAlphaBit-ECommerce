@@ -21,24 +21,17 @@ class HomePageResource extends JsonResource
                     'image_path' => asset($slider->image_path),
                 ];
             }),
+            'categories' => CategoryResource::collection($this['categories']),
 
-            'featured_product' => ProductResource::collection(
-                $this['featured_product']
-            ),
+            'product_with_active_sales' => ProductResource::collection($this['product_with_active_sales']),
 
-            'latest_product' => ProductResource::collection(
-                $this['latest_product']
-            ),
+            'most_reviewed_products' => ProductResource::collection($this['most_reviewed_products']),
 
-            'product_with_active_sales' => ProductResource::collection(
-                $this['product_with_active_sales']
-            ),
+            'latest_products' => ProductResource::collection($this['latest_products']),
 
-            'product_with_black_color' => ProductResource::collection($this['product_with_black_color']),
+            'featured_products' => ProductResource::collection($this['featured_products']),
 
-            // 'categories' => CategoryResource::collection(
-            //     $this['categories']
-            // ),
+
         ];
     }
 }

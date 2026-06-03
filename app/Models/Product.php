@@ -20,7 +20,9 @@ class Product extends Model
         'description',
         'price',
         'brand',
-        'is_available'
+        'is_available',
+        'reviews',
+        'reviews_count'
     ];
 
     protected $casts = [

@@ -26,6 +26,8 @@ class ProductResource extends JsonResource
             'is_available' => $this->is_available,
             'category' => $this->category->name,
             'hero_image' => $this->media->where('is_hero', true)->first() ? asset($this->media->where('is_hero', true)->first()->path) : null,
+            'reviews' => $this->reviews,
+            'reviews_count' => $this->reviews_count,
         ];
     }
 }

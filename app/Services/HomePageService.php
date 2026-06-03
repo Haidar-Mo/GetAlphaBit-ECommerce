@@ -15,21 +15,23 @@ class HomePageService
     {
         $data = [
             'sliders' => Slider::latest()->take(5)->get(),
-            'featured_product' => Product::with(['category', 'media', 'sales'])
-                ->orderByDesc('reviews')
-                ->take(8)
-                ->get(),
-            'latest_product' => Product::with(['category', 'media', 'sales'])
-                ->latest()
-                ->take(8)
-                ->get(),
+            'categories' => Category::all(),
             'product_with_active_sales' => Product::with(['category', 'media', 'sales'])
                 ->whereHas('sales', function ($q) {
                     $q->where('is_active', true);
                 })
                 ->take(8)
                 ->get(),
-            'product_with_black_color' => Product::with(['category', 'media', 'sales'])
+            'most_reviewed_products' => Product::with(['category', 'media', 'sales'])
+                ->orderByDesc('reviews')
+                ->take(8)
+                ->get(),
+            'latest_products' => Product::with(['category', 'media', 'sales'])
+                ->latest()
+                ->take(8)
+                ->get(),
+
+            'featured_products' => Product::with(['category', 'media', 'sales'])
                 ->whereHas('attributes', function ($q) {
                     $q->where('name', 'color')->where('value', 'like', 'black');
                 })->latest()->take(5)->get()
