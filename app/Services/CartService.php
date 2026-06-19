@@ -30,6 +30,7 @@ class CartService
             $cartItem->update([
                 'subtotal' => $cartItem->price * $cartItem->quantity
             ]);
+            return $cartItem;
         }
         return $cart->cartItems()->create([
             'product_id' => $product->id,
