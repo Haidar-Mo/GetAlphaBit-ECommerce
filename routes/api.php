@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\API\CartController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\HomePageController;
+use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\ProfileController;
 use App\Http\Controllers\API\WishListController;
@@ -34,11 +36,26 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // profile
     Route::put('/profile/edit', [ProfileController::class, 'update']);
-   // Route::post('/profile', [ProfileController::class, 'index']); //: Why "post" ?? its get. 
+    Route::get('/profile', [ProfileController::class, 'index']);
 
     //: show my profile
     Route::get('/profile', [ProfileController::class, 'show']);
 
     Route::get('/WishList', [WishListController::class, 'index']);
     Route::post('/toggle/{id}', [WishListController::class, 'toggleWishList']);
+
+    // cart
+
+    Route::post('/add-to-cart', [CartController::class, 'store']);
+    Route::put('/change-quantity/{cartItem}', [CartController::class, 'update']);
+    Route::put('/remove-item/{cartItem}', [CartController::class, 'removeItem']);
+    Route::put('/apply-coupon', [CartController::class, 'applyCoupon']);
+    Route::put('cancel-cart', [CartController::class, 'cancel']);
+
+    //Order
+
+    Route::post('/check-out', [OrderController::class, 'checkout']);
+    Route::get('/history', [OrderController::class, 'history']);
+    Route::get('/show/{order}', [OrderController::class, 'show']);
+
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddToCartRequest;
+use App\Http\Requests\ApplyCouponRequest;
 use App\Http\Requests\UpdatCartRequest;
 use App\Http\Resources\CartItemResource;
 use App\Http\Resources\CartResource;
@@ -50,5 +51,22 @@ class CartController extends Controller
             return $this->error($e);
         }
 
+    }
+
+    public function removeItem(CartItem $cartItem)
+    {
+        return $this->cartService->removeItem($cartItem);
+    }
+
+    public function applyCoupon(ApplyCouponRequest $request)
+    {
+        $cart = $this->cartService->applyCoupon(auth()->user(), $request->code);
+
+        return new CartResource($cart->load(['cartItems.product.media', 'coupon']));
+    }
+
+    public function cancel()
+    {
+        return $this->cartService->cancelCart(auth()->user());
     }
 }
