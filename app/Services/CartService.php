@@ -16,33 +16,40 @@ class CartService
 {
     public function addToCart($user, $data)
     {
-        $cart = Cart::findOrNew(
+        $cart = Cart::firstOrCreate(
             [
                 'user_id' => $user->id,
                 'status' => CartStatus::ACTIVE
             ]
         );
+
         $product = Product::findOrFail($data['product_id']);
 
         $cartItem = $cart->cartItems()->where('product_id', $product->id)->first();
+
         if ($cartItem) {
             $cartItem->increment('quantity', $data['quantity']);
             $cartItem->update([
                 'subtotal' => $cartItem->price * $cartItem->quantity
             ]);
-            return $cartItem;
+        } else {
+            $cart->cartItems()->create([
+                'product_id' => $product->id,
+                'quantity' => $data['quantity'],
+                'price' => $product->price,
+                'subtotal' => $product->price * $data['quantity']
+            ]);
         }
-        return $cart->cartItems()->create([
-            'product_id' => $product->id,
-            'quantity' => $data['quantity'],
-            'price' => $product->price,
-            'subtotal' => $product->price * $data['quantity']
+
+        return $cart->load([
+            'cartItems.product.media',
+            'coupon'
         ]);
     }
     public function updateQuantity(CartItem $cartItem, $quantity)
     {
         $cartItem->update([
-            'quntity' => $quantity,
+            'quantity' => $quantity,
             'subtotal' => $cartItem->price * $quantity
         ]);
 
@@ -56,12 +63,13 @@ class CartService
 
     public function applyCoupon($user, $code)
     {
-        $cart = Cart::findOrNew([
-            'user_id' => $user->id,
-            'status' => CartStatus::ACTIVE
-        ]);
+        $cart = Cart::where('user_id', $user->id)
+            ->where('status', CartStatus::ACTIVE)
+            ->firstOrFail();
 
-        $coupon = Coupon::where('code', $code)->where('is_active', true)->firstOrFail();
+        $coupon = Coupon::where('code', $code)
+            ->where('is_active', true)
+            ->firstOrFail();
 
         $cart->update([
             'coupon_id' => $coupon->id
@@ -72,9 +80,9 @@ class CartService
 
     public function cancelCart($user)
     {
-        $cart = Cart::findOrFail([
-            'user_id' => $user->id
-        ]);
+        $cart = Cart::where('user_id', $user->id)
+            ->where('status', CartStatus::ACTIVE)
+            ->firstOrFail();
 
         $cart->update([
             'status' => CartStatus::ABANDONED

@@ -28,12 +28,17 @@ class CartController extends Controller
     public function store(AddToCartRequest $request)
     {
         try {
-            $cart = $this->cartService->addToCart(auth()->user(), $request);
+
+            $cart = $this->cartService->addToCart(
+                auth()->user(),
+                $request->validated()
+            );
 
             return $this->success(
                 new CartResource($cart),
                 'Product added successfully'
             );
+
         } catch (Exception $e) {
             return $this->error($e);
         }
@@ -55,7 +60,11 @@ class CartController extends Controller
 
     public function removeItem(CartItem $cartItem)
     {
-        return $this->cartService->removeItem($cartItem);
+        $item = $this->cartService->removeItem($cartItem);
+        return $this->success(
+            $item,
+            'Item removed successfully'
+        );
     }
 
     public function applyCoupon(ApplyCouponRequest $request)
@@ -67,6 +76,11 @@ class CartController extends Controller
 
     public function cancel()
     {
-        return $this->cartService->cancelCart(auth()->user());
+        $item = $this->cartService->cancelCart(auth()->user());
+
+        return $this->success(
+            $item,
+            'Cart Canceled successfully'
+        );
     }
 }
