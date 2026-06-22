@@ -20,7 +20,7 @@ class CartItemResource extends JsonResource
                 'id' => $this->product?->id,
                 'name' => $this->product?->name,
                 'price' => $this->product?->price,
-                'image' => $this->product?->media->where('is_hero', true)->first()->path()
+                'image' => $this->product?->media->where('is_hero', true)->first()?->path()
             ],
             'quantity' => $this->quantity,
             'subtotal' => $this->subtotal

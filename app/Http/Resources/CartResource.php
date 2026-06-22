@@ -14,7 +14,8 @@ class CartResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $subtotal = $this->cartItem->sum('subtotal');
+        $subtotal = $this->cartItems->sum('subtotal');
+
         $discount = 0;
 
         if ($this->coupon) {
@@ -24,6 +25,7 @@ class CartResource extends JsonResource
                 $discount = ($subtotal * $this->coupon->value) / 100;
             }
         }
+
         return [
             'id' => $this->id,
             'status' => $this->status->value,

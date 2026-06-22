@@ -38,7 +38,7 @@ class OrderService
             $order = Order::create([
                 'user_id' => $user->id,
                 'shipping_address' => $data['shipping_address'],
-                'order_number' => 'ORD-' + strtoupper(Str::random(5)),
+                'order_number' => 'ORD-' . strtoupper(Str::random(5)),
                 'subtotal' => $subtotal,
                 'shipping_cost' => 20,
                 'discount_amount' => $discount,
@@ -49,7 +49,7 @@ class OrderService
             ]);
 
             foreach ($cart->cartItems as $item) {
-                $order->orderItems->create([
+                $order->orderItems()->create([
                     'product_id' => $item->product_id,
                     'price' => $item->price,
                     'quantity' => $item->quantity,
