@@ -23,7 +23,8 @@ class Order extends Model
         'total',
         'status',
         'payment_status',
-        'payment_method'
+        'payment_method',
+        'stripe_payment_intent_id',
     ];
 
     protected $casts = [

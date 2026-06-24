@@ -6,6 +6,7 @@ use App\Http\Controllers\API\HomePageController;
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\ProfileController;
+use App\Http\Controllers\API\StripeWebhookController;
 use App\Http\Controllers\API\WishListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -57,5 +58,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/check-out', [OrderController::class, 'checkout']);
     Route::get('/history', [OrderController::class, 'history']);
     Route::get('/show/{order}', [OrderController::class, 'show']);
+
+
+    // strip
+
+    Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle']);
+    Route::get('/order/{order}/payment-status', [OrderController::class, 'paymentStatus']);
 
 });
