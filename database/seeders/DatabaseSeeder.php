@@ -2,11 +2,7 @@
 
 namespace Database\Seeders;
 
-/* use App\Models\Cart;
-use App\Models\CartItem;
-use App\Models\Coupon;
-use App\Models\Order;
-use App\Models\OrderItem; */
+
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Coupon;
@@ -38,7 +34,7 @@ class DatabaseSeeder extends Seeder
 
     $this->call(CategorySeeder::class);
 
-    Product::factory(3)
+    Product::factory(30)
       ->has(ProductAttribute::factory(6), 'attributes')
       ->has(Media::factory(3), 'media')
       ->has(Review::factory(5), 'reviews')
@@ -52,7 +48,7 @@ class DatabaseSeeder extends Seeder
 
     Coupon::factory(5)->create();
 
-    Cart::factory(30)
+    Cart::factory(5)
       ->create()
       ->each(function ($cart) {
 
@@ -62,7 +58,7 @@ class DatabaseSeeder extends Seeder
           ]);
       });
 
-    Order::factory(50)
+    Order::factory(10)
       ->create()
       ->each(function ($order) {
 
